@@ -12,7 +12,8 @@ interface FoodContentFeedProps {
 }
 
 export default function FoodContentFeed({ items, initialIndex = 0 }: FoodContentFeedProps) {
-  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const safeIndex = Math.min(Math.max(initialIndex, 0), items.length - 1);
+  const [currentIndex, setCurrentIndex] = useState(safeIndex);
   const [feedItems, setFeedItems] = useState<FoodItem[]>(items);
   const translateY = useRef(new Animated.Value(0)).current;
 
